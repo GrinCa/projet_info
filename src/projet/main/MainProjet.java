@@ -13,20 +13,14 @@ public class MainProjet extends JFrame {
 
     public static void main(String args[]) throws IOException {
 
-        /*WindowManager windowManager = new WindowManager();
+        WindowManager windowManager = new WindowManager();
         windowManager.createWindow(Window.MAIN);
         BufferedImage image = ImageIO.read(new File("image.png"));
         ImagePNG imagePNG = new ImagePNG(image);
-        BufferedImage image2 = ImageIO.read(new File("image2.png"));
-        ImagePNG imagePNG2 = new ImagePNG(image2);
-        ImagePNG assemble = imagePNG.insertImage(imagePNG2);
         
-
         
-        ImagePNG noirEtBlanc = imagePNG.binairisation(80).filtrage("contour");
-        ImagePNG im = imagePNG.getGrey().filtrage("contour");
-        Fenetre fen = new Fenetre(assemble.createBufferedImage());
-        fen.setVisible(true);*/
+        Fenetre fen = new Fenetre(imagePNG.createBufferedImage());
+        fen.setVisible(true);
         
         System.out.println("ok");
         
