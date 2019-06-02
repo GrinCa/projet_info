@@ -21,9 +21,6 @@ public class MainProjet extends JFrame {
         Affichage aff = new Affichage();
         aff.setVisible(true);
         
-        System.out.println("hello world!");
-        
-
         System.out.println("Hello world!");
   
         
