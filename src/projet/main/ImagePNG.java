@@ -152,6 +152,11 @@ public class ImagePNG {
         }
         return copy;
     }
+    
+    public ImagePNG copy(){
+        return new ImagePNG(this.getImage().clone());
+    }
+
 
     public BufferedImage createBufferedImage() {
         BufferedImage bf = new BufferedImage(this.image.length, this.image[0].length, BufferedImage.TYPE_INT_RGB);
