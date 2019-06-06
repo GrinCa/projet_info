@@ -25,8 +25,11 @@ public class MainProjet extends JFrame {
         message.lire();
         message.binaire();
         
-        ImagePNG copy = imagePNG.encodage(message.getmsgBinaire());
-        ArrayList<Integer> decodage = copy.decodage();
+        Codage codage = new Codage(imagePNG);
+        codage.encodage(message.getmsgBinaire());
+        System.out.println(codage.decodage());
+
+        
         
     }
 
