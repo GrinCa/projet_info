@@ -142,6 +142,14 @@ public class ImagePNG {
     public ImagePNG copy(){
         return new ImagePNG(this.getImage().clone());
     }
+    
+    public void saveImage(String path){
+        try{
+            ImageIO.write(this.createBufferedImage(), "png", new File(path));
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 
 
     public BufferedImage createBufferedImage() {
