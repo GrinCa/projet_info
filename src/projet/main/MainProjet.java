@@ -3,6 +3,7 @@ package projet.main;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import projet.graphique.Fenetre;
@@ -17,10 +18,15 @@ public class MainProjet extends JFrame {
         BufferedImage image = ImageIO.read(new File("image.png"));
         ImagePNG imagePNG = new ImagePNG(image);
         
-        Fenetre fen = new Fenetre();
+        /*Fenetre fen = new Fenetre();
         fen.setVisible(true);
-        fen.repaint();
-  
+        fen.repaint()*/
+        Message message = new Message("texte.txt");
+        message.lire();
+        message.binaire();
+        
+        ImagePNG copy = imagePNG.encodage(message.getmsgBinaire());
+        ArrayList<Integer> decodage = copy.decodage();
         
     }
 

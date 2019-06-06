@@ -82,21 +82,7 @@ public class ImagePNG {
         return copy;
     }
 
-    //glisse le message dans la photo
-    public ImagePNG encodage(ArrayList<Integer> messageBinaire) {
-        Pixel[][] copy = new Pixel[this.getWidth()][this.getHeight()];
-        for (int i = 0; i < 4 - messageBinaire.size() % 4; i++) {
-            messageBinaire.add(-1);
-        }
-        for (int i = 0; i <= messageBinaire.size() - 4; i += 4) {
-            int cle = 0;
-            for (int j = 0; j < 4; j++) {
-                cle = cle | messageBinaire.get(i + j) << (8 * j);
-            }
-
-        }
-        return new ImagePNG(copy);
-    }
+    
 
     public ImagePNG getBlue() {
         ImagePNG copy = new ImagePNG(this.image.clone()); //on creer une copy de this

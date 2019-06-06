@@ -165,6 +165,7 @@ public class Fenetre extends javax.swing.JFrame {
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         
+        jPanel1.removeAll();
         ImagePNG imPNG = imagePNG.copy();
         
         if(imPNG== null){
@@ -176,6 +177,8 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        
+        jPanel1.removeAll();
         ImagePNG imPNG = imagePNG.copy();
         
         if(imPNG== null){
@@ -188,6 +191,8 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        
+        jPanel1.removeAll();
         ImagePNG imPNG = imagePNG.copy();
         
         if(imPNG== null){

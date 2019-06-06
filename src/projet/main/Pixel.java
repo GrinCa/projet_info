@@ -14,11 +14,11 @@ import java.util.ArrayList;
 class Pixel {
 
     private int valeurEntierePixel;
-    private byte[] tabBinaire;
+    private int[] tabBinaire;
 
     public Pixel(int valeurEntierePixel) {
         this.valeurEntierePixel = valeurEntierePixel;
-        tabBinaire = new byte[32];
+        tabBinaire = new int[32];
 
         for (int i = 0; i < 32; i++) {
             tabBinaire[i] = (byte) ((this.valeurEntierePixel >> i) & 1);
@@ -125,7 +125,7 @@ class Pixel {
 
     }
     
-    public byte[] getTabBin(){
+    public int[] getTabBin(){
         return tabBinaire;
     }
 
