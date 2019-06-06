@@ -11,7 +11,7 @@ import javax.swing.JFrame;
  *
  * @author jecobich
  */
-public class Histogram extends JFrame {
+public class Histogram extends JFrame{
 
     private Panel panel;
     private double[] red;
@@ -26,6 +26,8 @@ public class Histogram extends JFrame {
         this.red = histogram[0];
         this.green = histogram[1];
         this.blue = histogram[2];
+        setTitle("Histograme des couleurs");
+        setBounds(20, 20, 300 , 800);
     }
 
    
@@ -43,11 +45,6 @@ public class Histogram extends JFrame {
         return histogrammeCouleurRGB;
     }
 
-    public void showHistogram() {
-        setSize(300, 900);
-        setVisible(true);
-    }
-    
     public void save() {
 
         try {
@@ -58,15 +55,25 @@ public class Histogram extends JFrame {
             }
             file.close();
         } catch (IOException ex) {
-            System.err.println("ERREUr : Histogram");
+            System.err.println("ERREUR : Histogram");
         }
 
     }
 
     @Override
-    public void paint(Graphics g) {
-
-       
+    public void paint(Graphics g){
+        super.paint(g);
+        g.drawLine(10, 200, 270, 200);
+        g.drawLine(10, 200, 10, 10);
+        g.drawString("Canal rouge", 120, 210);
+        //
+        g.drawLine(10, 430, 270, 430);
+        g.drawLine(10, 430, 10, 230);
+        //
+        g.drawLine(10, 660, 270, 660);
+        g.drawLine(10, 660, 10, 460);
+    
+        
+        
     }
-
 }
