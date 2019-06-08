@@ -20,13 +20,16 @@ public class Codage {
     //glisse le message dans la photo
     public ImagePNG encodage(ArrayList<Integer> messageBinaire) {
         Pixel[][] copy = imagePNG.copy().getImage();
+        
         int compteur = 0;
         for (int i = 0; i <= messageBinaire.size() - 4; i = i + 4) {
             for (int j = 0; j < 4; j++) {
                 copy[compteur / imagePNG.getHeight()][compteur % imagePNG.getHeight()].getTabBin()[8 * j] = messageBinaire.get(i + j);
+                copy[compteur / imagePNG.getHeight()][compteur % imagePNG.getHeight()].tabToInt();
             }
             compteur++;
         }
+
         return new ImagePNG(copy);
     }
 
