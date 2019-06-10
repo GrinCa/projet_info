@@ -29,7 +29,13 @@ public class Fenetre extends javax.swing.JFrame {
      */
     public Fenetre() {
         initComponents();
+        setLocation(100, 100);
         radioBoutonBinairisation.setEnabled(false);
+        boutonInserer.setEnabled(false);
+        checkBox.setEnabled(false);
+        boutonAnnulationModifs.setEnabled(false);
+        boutonSauvegarder.setEnabled(false);
+        boutonVideMemoire.setEnabled(false);
     }
 
     /**
@@ -43,19 +49,29 @@ public class Fenetre extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        radioBoutonRouge = new javax.swing.JRadioButton();
-        raidioBoutonVert = new javax.swing.JRadioButton();
-        radioBoutonBleu = new javax.swing.JRadioButton();
-        radioBoutonBinairisation = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        radioBoutonGris = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        boutonSauvegarder = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         textDonneesImage = new javax.swing.JTextField();
+        boutonVideMemoire = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        radioBoutonBleu = new javax.swing.JRadioButton();
+        jLabel5 = new javax.swing.JLabel();
+        radioBoutonGris = new javax.swing.JRadioButton();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        radioBoutonRouge = new javax.swing.JRadioButton();
+        boutonSelectionInsertion = new javax.swing.JButton();
+        raidioBoutonVert = new javax.swing.JRadioButton();
+        boutonInserer = new javax.swing.JButton();
         histgrammeBouton = new javax.swing.JButton();
+        checkBox = new javax.swing.JCheckBox();
+        boutonExtraire = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        radioBoutonBinairisation = new javax.swing.JRadioButton();
+        boutonAnnulationModifs = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -67,67 +83,17 @@ public class Fenetre extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 506, Short.MAX_VALUE)
+            .addGap(0, 914, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 312, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jLabel1.setText("Cannaux de couleur :");
-
-        buttonGroup1.add(radioBoutonRouge);
-        radioBoutonRouge.setText("Canal Rouge");
-        radioBoutonRouge.addActionListener(new java.awt.event.ActionListener() {
+        boutonSauvegarder.setText("Sauvegarder");
+        boutonSauvegarder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioBoutonRougeActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(raidioBoutonVert);
-        raidioBoutonVert.setText("Canal Vert");
-        raidioBoutonVert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                raidioBoutonVertActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(radioBoutonBleu);
-        radioBoutonBleu.setText("Canal Bleu");
-        radioBoutonBleu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioBoutonBleuActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(radioBoutonBinairisation);
-        radioBoutonBinairisation.setText("Binairisation");
-        radioBoutonBinairisation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioBoutonBinairisationActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("  Seuil (0-255)");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(radioBoutonGris);
-        radioBoutonGris.setText("Canal Gris");
-        radioBoutonGris.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioBoutonGrisActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                boutonSauvegarderActionPerformed(evt);
             }
         });
 
@@ -141,10 +107,108 @@ public class Fenetre extends javax.swing.JFrame {
             }
         });
 
+        boutonVideMemoire.setText("Vider mémoire");
+        boutonVideMemoire.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonVideMemoireActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radioBoutonBleu);
+        radioBoutonBleu.setText("Canal Bleu");
+        radioBoutonBleu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBoutonBleuActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Insertion d'une image dans une autre :");
+
+        buttonGroup1.add(radioBoutonGris);
+        radioBoutonGris.setText("Canal Gris");
+        radioBoutonGris.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBoutonGrisActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("=>");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radioBoutonRouge);
+        radioBoutonRouge.setText("Canal Rouge");
+        radioBoutonRouge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBoutonRougeActionPerformed(evt);
+            }
+        });
+
+        boutonSelectionInsertion.setText("Selectionner l'image");
+        boutonSelectionInsertion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonSelectionInsertionActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(raidioBoutonVert);
+        raidioBoutonVert.setText("Canal Vert");
+        raidioBoutonVert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                raidioBoutonVertActionPerformed(evt);
+            }
+        });
+
+        boutonInserer.setText("Inserer");
+        boutonInserer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonInsererActionPerformed(evt);
+            }
+        });
+
         histgrammeBouton.setText("Histogramme");
         histgrammeBouton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 histgrammeBoutonActionPerformed(evt);
+            }
+        });
+
+        checkBox.setText("Utiliser comme image");
+        checkBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxActionPerformed(evt);
+            }
+        });
+
+        boutonExtraire.setText("Extraire");
+        boutonExtraire.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonExtraireActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("  Seuil (0-255)");
+
+        jLabel7.setText("=>");
+
+        jLabel1.setText("Cannaux de couleur :");
+
+        buttonGroup1.add(radioBoutonBinairisation);
+        radioBoutonBinairisation.setText("Binairisation");
+        radioBoutonBinairisation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBoutonBinairisationActionPerformed(evt);
+            }
+        });
+
+        boutonAnnulationModifs.setText("Annuler les modifications");
+        boutonAnnulationModifs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonAnnulationModifsActionPerformed(evt);
             }
         });
 
@@ -172,72 +236,104 @@ public class Fenetre extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(textDonneesImage, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(boutonSauvegarder, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(boutonAnnulationModifs)
+                        .addGap(46, 46, 46)
+                        .addComponent(boutonVideMemoire))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(textDonneesImage, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(256, 256, 256)
+                                .addComponent(jLabel8))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addGap(37, 37, 37)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(radioBoutonGris)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(radioBoutonRouge)
+                                            .addGap(74, 74, 74)
+                                            .addComponent(histgrammeBouton)
+                                            .addGap(9, 9, 9))
+                                        .addComponent(radioBoutonGris)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(radioBoutonBinairisation)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel1)
+                                        .addComponent(raidioBoutonVert)
+                                        .addComponent(radioBoutonBleu)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(radioBoutonBinairisation)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel1)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(radioBoutonRouge)
-                                        .addGap(74, 74, 74)
-                                        .addComponent(histgrammeBouton)
-                                        .addGap(39, 39, 39))
-                                    .addComponent(raidioBoutonVert)
-                                    .addComponent(radioBoutonBleu)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(111, 111, 111)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(26, 26, 26))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(boutonSelectionInsertion, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel6))
+                                            .addComponent(checkBox))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(boutonInserer)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(boutonExtraire)))))))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(radioBoutonRouge)
-                            .addComponent(histgrammeBouton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(raidioBoutonVert)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radioBoutonBleu)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radioBoutonGris)
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(radioBoutonBinairisation)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(textDonneesImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(160, Short.MAX_VALUE))
+                    .addComponent(textDonneesImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boutonSauvegarder)
+                    .addComponent(boutonVideMemoire)
+                    .addComponent(boutonAnnulationModifs))
+                .addGap(74, 74, 74))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioBoutonRouge)
+                    .addComponent(histgrammeBouton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(raidioBoutonVert)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radioBoutonBleu)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radioBoutonGris)
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioBoutonBinairisation)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boutonSelectionInsertion)
+                    .addComponent(boutonInserer)
+                    .addComponent(boutonExtraire)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(checkBox)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel8)
+                .addContainerGap(324, Short.MAX_VALUE))
         );
 
         pack();
@@ -250,9 +346,11 @@ public class Fenetre extends javax.swing.JFrame {
         int retour = jFileChooser.showOpenDialog(null);
         if (retour == JFileChooser.APPROVE_OPTION) {
             chemin = jFileChooser.getSelectedFile().getName();
+            this.path = chemin;
         }
         try {
             imageBF = ImageIO.read(new File(chemin));
+            imageSave = imageBF;
         } catch (IOException ex) {
             Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -262,12 +360,16 @@ public class Fenetre extends javax.swing.JFrame {
 
         //Chargement des données pour la taille de l'image
         textDonneesImage.setText(imagePNG.getWidth() + "x" + imagePNG.getHeight());
+
+        boutonAnnulationModifs.setEnabled(true);
+        boutonSauvegarder.setEnabled(true);
+        boutonVideMemoire.setEnabled(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void radioBoutonRougeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBoutonRougeActionPerformed
 
         if (imageBF == null) {
-            JOptionPane.showMessageDialog(null, "Il faut charger une image");
+            JOptionPane.showMessageDialog(null, MessageChargementImage);
         } else {
             BufferedImage im = new ImagePNG(imageBF).getRed().createBufferedImage();
             Graphics2D gd = (Graphics2D) jPanel1.getGraphics();
@@ -282,7 +384,7 @@ public class Fenetre extends javax.swing.JFrame {
     private void raidioBoutonVertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raidioBoutonVertActionPerformed
 
         if (imageBF == null) {
-            JOptionPane.showMessageDialog(null, "Il faut charger une image");
+            JOptionPane.showMessageDialog(null, MessageChargementImage);
         } else {
             BufferedImage im = new ImagePNG(imageBF).getGreen().createBufferedImage();
             Graphics2D gd = (Graphics2D) jPanel1.getGraphics();
@@ -296,7 +398,7 @@ public class Fenetre extends javax.swing.JFrame {
     private void radioBoutonBleuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBoutonBleuActionPerformed
 
         if (imageBF == null) {
-            JOptionPane.showMessageDialog(null, "Il faut charger une image");
+            JOptionPane.showMessageDialog(null, MessageChargementImage);
         } else {
             BufferedImage im = new ImagePNG(imageBF).getBlue().createBufferedImage();
             Graphics2D gd = (Graphics2D) jPanel1.getGraphics();
@@ -308,7 +410,7 @@ public class Fenetre extends javax.swing.JFrame {
 
     private void radioBoutonBinairisationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBoutonBinairisationActionPerformed
         if (imageBF == null) {
-            JOptionPane.showMessageDialog(null, "Il faut charger une image");
+            JOptionPane.showMessageDialog(null, MessageChargementImage);
         }
         if (imageBF != null && jTextField1.getText() == "") {
             JOptionPane.showMessageDialog(null, "Il faut choisir un seuil pour la binairisation");
@@ -340,7 +442,7 @@ public class Fenetre extends javax.swing.JFrame {
     private void radioBoutonGrisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBoutonGrisActionPerformed
 
         if (imageBF == null) {
-            JOptionPane.showMessageDialog(null, "Il faut charger une image");
+            JOptionPane.showMessageDialog(null, MessageChargementImage);
         } else {
             BufferedImage im = new ImagePNG(imageBF).getGrey().createBufferedImage();
             Graphics2D gd = (Graphics2D) jPanel1.getGraphics();
@@ -350,7 +452,7 @@ public class Fenetre extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_radioBoutonGrisActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void boutonSauvegarderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonSauvegarderActionPerformed
         if (imageSave == null) {
             JOptionPane.showMessageDialog(null, "Ouvrir ou modifier une image pour l'enregistrer");
         } else {
@@ -362,7 +464,7 @@ public class Fenetre extends javax.swing.JFrame {
             }
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_boutonSauvegarderActionPerformed
 
     private void textDonneesImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDonneesImageActionPerformed
         // TODO add your handling code here:
@@ -370,7 +472,7 @@ public class Fenetre extends javax.swing.JFrame {
 
     private void histgrammeBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_histgrammeBoutonActionPerformed
         if (imageBF == null) {
-            JOptionPane.showMessageDialog(null, "Il faut charger une image");
+            JOptionPane.showMessageDialog(null, MessageChargementImage);
         } else {
             Histogram histogram = new Histogram(new ImagePNG(imageBF));
             histogram.setVisible(true);
@@ -378,17 +480,112 @@ public class Fenetre extends javax.swing.JFrame {
 
     }//GEN-LAST:event_histgrammeBoutonActionPerformed
 
+    private void boutonSelectionInsertionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonSelectionInsertionActionPerformed
+        if (imageBF == null) {
+            JOptionPane.showMessageDialog(null, MessageChargementImage);
+        } else {
+            File file;
+            JFileChooser jFileChooser = new JFileChooser(".");
+            int retour = jFileChooser.showOpenDialog(null);
+            if (retour == JFileChooser.APPROVE_OPTION) {
+                file = jFileChooser.getSelectedFile();
+                try {
+                    imageInseree = ImageIO.read(file);
+                } catch (IOException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                boutonInserer.setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_boutonSelectionInsertionActionPerformed
+
+    private void boutonVideMemoireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonVideMemoireActionPerformed
+        jPanel1.removeAll();
+        jPanel1.repaint();
+        imageBF = null;
+        imageSave = null;
+        imageInseree = null;
+    }//GEN-LAST:event_boutonVideMemoireActionPerformed
+
+    private void boutonInsererActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonInsererActionPerformed
+        ImagePNG imagePNG1 = new ImagePNG(imageBF);
+        ImagePNG imagePNG2 = new ImagePNG(imageInseree);
+        ImagePNG insertion = imagePNG1.insertImage(imagePNG2);
+        Graphics2D g = (Graphics2D) jPanel1.getGraphics();
+        imageSave = insertion.createBufferedImage();
+        g.drawImage(imageSave, 0, 0, this);
+        jPanel1.paintComponents(g);
+        checkBox.setEnabled(true);
+    }//GEN-LAST:event_boutonInsererActionPerformed
+
+    private void boutonExtraireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonExtraireActionPerformed
+
+        if (imageSave == null) {
+            JOptionPane.showMessageDialog(null, MessageChargementImage);
+        } else {
+            ImagePNG imagePNGInseree = new ImagePNG(imageSave);
+            ImageView imageViewInseree = new ImageView("Image inseree",
+                    imagePNGInseree.getInseredImage().createBufferedImage());
+            imageViewInseree.setVisible(true);
+        }
+
+    }//GEN-LAST:event_boutonExtraireActionPerformed
+
+    private void checkBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxActionPerformed
+        if (checkBox.isSelected()) {
+            imageBF = imageSave;
+            radioBoutonGris.setEnabled(false);
+            jTextField1.setEnabled(false);
+        } else {
+            try {
+                imageBF = ImageIO.read(new File(path));
+            } catch (IOException ex) {
+                Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            radioBoutonGris.setEnabled(true);
+            jTextField1.setEnabled(true);
+            boutonExtraire.setEnabled(false);
+        }
+    }//GEN-LAST:event_checkBoxActionPerformed
+
+    private void boutonAnnulationModifsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonAnnulationModifsActionPerformed
+        Graphics2D g = (Graphics2D) jPanel1.getGraphics();
+
+        try {
+            imageBF = ImageIO.read(new File(path));
+            g.drawImage(imageBF, 0, 0, this);
+        } catch (IOException ex) {
+            Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jPanel1.paintComponents(g);
+    }//GEN-LAST:event_boutonAnnulationModifsActionPerformed
+
     private BufferedImage imageBF = null;
+    private BufferedImage imageBFSave = null;
     private BufferedImage imageSave = null;
+    private BufferedImage imageInseree = null;
+    private BufferedImage imageAssemblee = null;
+    private String MessageChargementImage = "Il faut charger une image";
+    private String path = "";
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton boutonAnnulationModifs;
+    private javax.swing.JButton boutonExtraire;
+    private javax.swing.JButton boutonInserer;
+    private javax.swing.JButton boutonSauvegarder;
+    private javax.swing.JButton boutonSelectionInsertion;
+    private javax.swing.JButton boutonVideMemoire;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JCheckBox checkBox;
     private javax.swing.JButton histgrammeBouton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
