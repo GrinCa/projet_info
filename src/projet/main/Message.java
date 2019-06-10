@@ -19,26 +19,27 @@ public class Message {
     private String message;
     private ArrayList<Integer> msgBinaire;
     private char[] charVar;
-    private String adresse;
+    private String path;
 
-    public Message(String adresse) {
-        this.adresse = adresse;
+    public Message(String message) {
+        this.message = message;
     }
     
+    
 
-    public void lire() {
+    public void lire(String path) {
 
-        StringBuilder msg = new StringBuilder();
-
+        String msg = "";
+        this.path = path;
         try {
-            BufferedReader bf = new BufferedReader(new FileReader(adresse));
+            BufferedReader bf = new BufferedReader(new FileReader(path));
             while (bf.ready()) {
-                msg.append(bf.readLine());
+                msg += bf.readLine()+"\n";
             }
 
         } catch (IOException e) {
         }
-        message = msg.toString();
+        message = msg;
 
     }
 

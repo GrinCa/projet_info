@@ -14,7 +14,6 @@ import java.util.ArrayList;
 class Pixel {
 
     private int valeurEntierePixel;
-
     
     public Pixel(int valeurEntierePixel) {
         this.valeurEntierePixel = valeurEntierePixel;
@@ -71,10 +70,6 @@ class Pixel {
 
     public void setValeurEntierePixel(int valeurEntierePixel) {
         this.valeurEntierePixel = valeurEntierePixel;
-    }
-
-    public Pixel pixelSum(Pixel other) {
-        return new Pixel(this.getValeurEntierePixel() | other.getValeurEntierePixel());
     }
 
     public String toString() {

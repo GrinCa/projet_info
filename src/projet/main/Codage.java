@@ -13,41 +13,45 @@ import java.util.ArrayList;
  */
 public class Codage {
 
-    public Codage(ImagePNG imagePNG) {
-        this.imagePNG = imagePNG;
-    }
-
     //glisse le message dans la photo
-    public ImagePNG encodage(ArrayList<Integer> messageBinaire) {
+    public static ImagePNG encodage(ImagePNG imagePNG, ArrayList<Integer> messageBinaire) {
         Pixel[][] copy = imagePNG.copy().getImage();
-        
+        int cle = 254 | 254 << 8 | 254 << 16 | 254 << 24;
         int compteur = 0;
         for (int i = 0; i <= messageBinaire.size() - 4; i = i + 4) {
-            for (int j = 0; j < 4; j++) {
-                copy[compteur / imagePNG.getHeight()][compteur % imagePNG.getHeight()].getTabBin()[8 * j] = messageBinaire.get(i + j);
-                copy[compteur / imagePNG.getHeight()][compteur % imagePNG.getHeight()].tabToInt();
-            }
+            int message = messageBinaire.get(i)
+                    | messageBinaire.get(i + 1) << 8
+                    | messageBinaire.get(i + 2) << 16
+                    | messageBinaire.get(i + 3) << 24;
+            int valeurEntierePixelModifiee = copy[compteur / imagePNG.getHeight()][compteur % imagePNG.getHeight()].getValeurEntierePixel() & cle;
+            copy[compteur / imagePNG.getHeight()][compteur % imagePNG.getHeight()]
+                    .setValeurEntierePixel(valeurEntierePixelModifiee | message);
             compteur++;
         }
-
         return new ImagePNG(copy);
     }
 
-    public String decodage() {
-        int longueurTot = imagePNG.getWidth() * imagePNG.getHeight();
+    public static String decodage(ImagePNG imageADecodee, int diviseurLongueur) {
+        int longueurTot = imageADecodee.getWidth() * imageADecodee.getHeight();
         ArrayList<Integer> messageBin = new ArrayList<Integer>();
         for (int i = 0; i < longueurTot; i++) {
-            for (int j = 0; j < 4; j++) {
-                messageBin.add(imagePNG.getImage()[i / imagePNG.getHeight()][i % imagePNG.getHeight()].getTabBin()[8 * j]);
-            }
+            messageBin.add(imageADecodee.getImage()[i / imageADecodee.getHeight()][i % imageADecodee.getHeight()]
+                    .getValeurEntierePixel() & 1);
+            messageBin.add((imageADecodee.getImage()[i / imageADecodee.getHeight()][i % imageADecodee.getHeight()]
+                    .getValeurEntierePixel() & 256) >> 8);
+            messageBin.add((imageADecodee.getImage()[i / imageADecodee.getHeight()][i % imageADecodee.getHeight()]
+                    .getValeurEntierePixel() & 65_536) >> 16);
+            messageBin.add((imageADecodee.getImage()[i / imageADecodee.getHeight()][i % imageADecodee.getHeight()]
+                    .getValeurEntierePixel() & 16_777_216) >> 24);
 
         }
+        System.out.println("ok");
         
         String message = "";
-        for (int i = 0; i <= messageBin.size()-8; i += 8) {
+        for (int i = 0; i <= messageBin.size() / diviseurLongueur - 8; i += 8) {
             byte element = 0;
             for (int j = 0; j < 8; j++) {
-                element += messageBin.get(i + j) * Math.pow(2, j);
+                element |= messageBin.get(i + j) << j;
             }
             message += (char) element;
         }
@@ -55,5 +59,5 @@ public class Codage {
     }
 
     private ImagePNG imagePNG;
-    
+
 }

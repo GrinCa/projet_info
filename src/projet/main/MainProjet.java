@@ -26,14 +26,22 @@ public class MainProjet extends JFrame {
         fen.repaint();
         
 
-        /*Message message = new Message("texte.txt");
-        message.lire();
+        /*Message message = new Message("julien");
         message.binaire();
         
-        Codage codage = new Codage(imagePNG);
-        codage.encodage(message.getmsgBinaire());
-        System.out.println(codage.decodage());*/
-
+        ImagePNG codage = Codage.encodage(imagePNG, message.getmsgBinaire());
+        System.out.println(Codage.decodage(codage, 10));*/
+        
+        
+        /*ImagePNG imagePNG2 = new ImagePNG(ImageIO.read(new File("image2.png")));
+        ImagePNG insere = imagePNG.insertImage(imagePNG2);
+        
+        ImageView imageView1 = new ImageView("Inseree", insere.getInseredImage().createBufferedImage());
+        imageView1.setVisible(true);
+        imageView1.setDefaultCloseOperation(EXIT_ON_CLOSE);*/
+        
+        
+        
         
         
     }

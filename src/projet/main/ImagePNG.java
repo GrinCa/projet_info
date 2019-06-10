@@ -31,8 +31,12 @@ public class ImagePNG implements Cloneable{
     public ImagePNG(Pixel[][] image) {
         this.Width = image.length;
         this.Height = image[0].length;
-        this.image = image.clone();
-        
+        this.image = new Pixel[Width][Height];
+        for(int i =0;i<Width;i++){
+            for(int j=0;j<Height;j++){
+                this.image[i][j] = new Pixel(image[i][j].getValeurEntierePixel());
+            }
+        }
     }
 
     private Pixel[][] createTab(BufferedImage bfIm) {
