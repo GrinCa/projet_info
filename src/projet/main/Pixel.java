@@ -14,32 +14,16 @@ import java.util.ArrayList;
 class Pixel {
 
     private int valeurEntierePixel;
-    private int[] tabBinaire;
 
+    
     public Pixel(int valeurEntierePixel) {
         this.valeurEntierePixel = valeurEntierePixel;
-        tabBinaire = new int[32];
-
-        for (int i = 0; i < 32; i++) {
-            tabBinaire[i] = (byte) ((this.valeurEntierePixel >> i) & 1);
-        }
     }
     
-    
-
-    public void tabToInt() {
-        int valeurEntiere = 0;
-        for (int i = 0; i < 32; i++) {
-            valeurEntiere += this.tabBinaire[i] * Math.pow(2, i);
-        }
-        this.valeurEntierePixel = valeurEntiere;
+    public Pixel copy(){
+        return new Pixel(this.getValeurEntierePixel());
     }
 
-    public void reloadTab() {
-        for (int i = 0; i < 32; i++) {
-            tabBinaire[i] = (byte) ((this.valeurEntierePixel >> i) & 1);
-        }
-    }
 
     public int getBlue() {
         int cle = 255;
@@ -57,36 +41,6 @@ class Pixel {
         int cle = 255 << 16;
         int redValue = valeurEntierePixel & cle;
         return redValue;
-    }
-
-    public void setRedCanal(int value) {//la valeur ne doit pas depasser un octet 
-        if (value > 255) {
-            System.err.println("ERREUR(setRedCanal) : valeur trop grande");
-        }
-        for (int i = 0; i < 8; i++) {
-            tabBinaire[16 + i] |= ((value >> i) & 1);
-        }
-        this.tabToInt();
-    }
-
-    public void setGreenCanal(int value) {//la valeur ne doit pas depasser un octet 
-        if (value > 255) {
-            System.err.println("ERREUR(setGreenCanal) : valeur trop grande");
-        }
-        for (int i = 0; i < 8; i++) {
-            tabBinaire[8 + i] |= ((value >> i) & 1);
-        }
-        this.tabToInt();
-    }
-
-    public void setBlueCanal(int value) {//la valeur ne doit pas depasser un octet 
-        if (value > 255) {
-            System.err.println("ERREUR(setBlueCanal) : valeur trop grande");
-        }
-        for (int i = 0; i < 8; i++) {
-            tabBinaire[i] |= ((value >> i) & 1);
-        }
-        this.tabToInt();
     }
 
     public int getGrey() {
@@ -111,31 +65,12 @@ class Pixel {
         return value255;
     }
 
-    public void insert(int[] mots) {
-
-        for (int i = 0; i < 4; i++) {
-            if (mots[i] == 1) {
-                tabBinaire[8 * i] = 1;
-            } else if (mots[i] == 0) {
-                tabBinaire[8 * i] = 0;
-            } else if (mots[8 * i] == -1) {
-                break;
-            }
-        }
-
-    }
-    
-    public int[] getTabBin(){
-        return tabBinaire;
-    }
-
     public int getValeurEntierePixel() {
         return valeurEntierePixel;
     }
 
     public void setValeurEntierePixel(int valeurEntierePixel) {
         this.valeurEntierePixel = valeurEntierePixel;
-        this.reloadTab();
     }
 
     public Pixel pixelSum(Pixel other) {
@@ -145,9 +80,6 @@ class Pixel {
     public String toString() {
         String affichage = "";
         affichage += "valeur entiere : " + this.getValeurEntierePixel() + "\nvaleur binaire : ";
-        for (int i = 0; i < 32; i++) {
-            affichage += "" + tabBinaire[31 - i];
-        }
         return affichage;
     }
 
