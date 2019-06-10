@@ -11,12 +11,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-public class ImagePNG {
+public class ImagePNG implements Cloneable{
 
     private Pixel[][] image;
     private int Width;
@@ -28,22 +27,12 @@ public class ImagePNG {
         this.Height = image[0].length;
     }
 
-    public ImagePNG(String path) {
-        BufferedImage bfIm = null;
-        try {
-            bfIm = ImageIO.read(new File(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        this.image = this.createTab(bfIm);
-        this.Width = image.length;
-        this.Height = image[0].length;
-    }
 
     public ImagePNG(Pixel[][] image) {
-        this.image = image;
         this.Width = image.length;
         this.Height = image[0].length;
+        this.image = image.clone();
+        
     }
 
     private Pixel[][] createTab(BufferedImage bfIm) {
@@ -195,22 +184,16 @@ public class ImagePNG {
 
         return tab;
     }
-    
 
     public ImagePNG insertImage(ImagePNG imagePNG) {
         ImagePNG copy = imagePNG.copy();
+        int cle = 15 << 4 | 15 << 12 | 15 << 20 | 15 << 28;
         for (int i = 0; i < imagePNG.getWidth(); i++) {
             for (int j = 0; j < imagePNG.getHeight(); j++) {
-                int valeurEntiereBleu = (this.getImage()[i][j].getBlue() >> 4) << 4
-                        | (copy.getImage()[i][j].getBlue() >> 4);
-                int valeurEntiereVert = (this.getImage()[i][j].getGreen() >> 12) << 12
-                        | (copy.getImage()[i][j].getGreen() >> 12) << 8;
-                int valeurEntiereRouge = (this.getImage()[i][j].getRed() >> 20) << 20
-                        | (copy.getImage()[i][j].getGreen() >> 20) << 16;
-                copy.getImage()[i][j].setValeurEntierePixel(
-                        valeurEntiereBleu
-                        | valeurEntiereVert
-                        | valeurEntiereRouge);
+                int valeurEntiereImageBase = this.getImage()[i][j].getValeurEntierePixel() & cle;
+                int valeurEntiereImageInseree = (copy.getImage()[i][j].getValeurEntierePixel() & cle) >> 4;
+                copy.getImage()[i][j].setValeurEntierePixel(valeurEntiereImageInseree
+                        | valeurEntiereImageBase);
             }
         }
         return copy;
@@ -218,26 +201,26 @@ public class ImagePNG {
 
     public ImagePNG getInseredImage() {
         ImagePNG copy = this.copy();
+        int cle = 15 | 15 << 8 | 15 << 16 | 15 << 24;
         for (int i = 0; i < copy.getWidth(); i++) {
             for (int j = 0; j < copy.getHeight(); j++) {
-                int valeurEntiereBleu = (copy.getImage()[i][j].getBlue() << 28) >> 24;
-                int valeurEntiereVert = (copy.getImage()[i][j].getGreen() << 20) >> 16;
-                int valeurEntiereRouge = (copy.getImage()[i][j].getRed() << 12) >> 8;
                 copy.getImage()[i][j].setValeurEntierePixel(
-                        valeurEntiereBleu
-                        | valeurEntiereRouge
-                        | valeurEntiereVert);
+                        (this.getImage()[i][j].getValeurEntierePixel() & cle) << 4);
             }
         }
         return copy;
     }
 
-    public void tabToInt() {
-        for (int i = 0; i < this.getWidth(); i++) {
-            for (int j = 0; j < this.getHeight(); j++) {
-                this.getImage()[i][j].tabToInt();
+    public ImagePNG getImageBase() {
+        ImagePNG copy = this.copy();
+        int cle = 240 | 240<<8 | 240<<8 | 240<<8;
+        for (int i = 0; i < copy.getWidth(); i++) {
+            for (int j = 0; j < copy.getHeight(); j++) {
+                copy.getImage()[i][j].setValeurEntierePixel(
+                        this.getImage()[i][j].getValeurEntierePixel() & cle);
             }
         }
+        return copy;
     }
 
     public Pixel getPixel(int width, int height) {
