@@ -82,8 +82,6 @@ public class ImagePNG {
         return copy;
     }
 
-    
-
     public ImagePNG getBlue() {
         ImagePNG copy = new ImagePNG(this.image.clone()); //on creer une copy de this
         for (int i = 0; i < image.length; i++) {
@@ -138,19 +136,18 @@ public class ImagePNG {
         }
         return copy;
     }
-    
-    public ImagePNG copy(){
+
+    public ImagePNG copy() {
         return new ImagePNG(this.getImage().clone());
     }
-    
-    public void saveImage(String path){
-        try{
+
+    public void saveImage(String path) {
+        try {
             ImageIO.write(this.createBufferedImage(), "png", new File(path));
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 
     public BufferedImage createBufferedImage() {
         BufferedImage bf = new BufferedImage(this.image.length, this.image[0].length, BufferedImage.TYPE_INT_RGB);
@@ -174,15 +171,15 @@ public class ImagePNG {
         } else if (type.equals("contour")) {
             tab = new double[3][3];
             int den = 15;
-            tab[0][0] = -1d/den;
-            tab[0][1] = -1d/den;
-            tab[0][2] = -1d/den;
-            tab[1][0] = -1d/den;
-            tab[1][1] = 8d/den;
-            tab[1][2] = -1d/den;
-            tab[2][0] = -1d/den;
-            tab[2][1] = -1d/den;
-            tab[2][2] = -1d/den;
+            tab[0][0] = -1d / den;
+            tab[0][1] = -1d / den;
+            tab[0][2] = -1d / den;
+            tab[1][0] = -1d / den;
+            tab[1][1] = 8d / den;
+            tab[1][2] = -1d / den;
+            tab[2][0] = -1d / den;
+            tab[2][1] = -1d / den;
+            tab[2][2] = -1d / den;
         } else if (type.equals("nette")) {
             tab = new double[3][3];
             tab[0][0] = 0;
@@ -198,24 +195,49 @@ public class ImagePNG {
 
         return tab;
     }
+    
 
     public ImagePNG insertImage(ImagePNG imagePNG) {
-        ImagePNG copy = new ImagePNG(this.getImage().clone());
+        ImagePNG copy = imagePNG.copy();
         for (int i = 0; i < imagePNG.getWidth(); i++) {
             for (int j = 0; j < imagePNG.getHeight(); j++) {
-                for(int k=0;k<3;k++){
-                    this.getImage()[i][j].getTabBin()[8*k] = 
-                            imagePNG.getImage()[i][j].getTabBin()[8*(k+1)-4];
-                    this.getImage()[i][j].getTabBin()[8*k+1] = 
-                            imagePNG.getImage()[i][j].getTabBin()[8*(k+1)-3];
-                    this.getImage()[i][j].getTabBin()[8*k+2] = 
-                            imagePNG.getImage()[i][j].getTabBin()[8*(k+1)-2];
-                    this.getImage()[i][j].getTabBin()[8*k+3] = 
-                            imagePNG.getImage()[i][j].getTabBin()[8*(k+1)-1];
-                }
+                int valeurEntiereBleu = (this.getImage()[i][j].getBlue() >> 4) << 4
+                        | (copy.getImage()[i][j].getBlue() >> 4);
+                int valeurEntiereVert = (this.getImage()[i][j].getGreen() >> 12) << 12
+                        | (copy.getImage()[i][j].getGreen() >> 12) << 8;
+                int valeurEntiereRouge = (this.getImage()[i][j].getRed() >> 20) << 20
+                        | (copy.getImage()[i][j].getGreen() >> 20) << 16;
+                copy.getImage()[i][j].setValeurEntierePixel(
+                        valeurEntiereBleu
+                        | valeurEntiereVert
+                        | valeurEntiereRouge);
             }
-        }System.out.println("ok");
+        }
         return copy;
+    }
+
+    public ImagePNG getInseredImage() {
+        ImagePNG copy = this.copy();
+        for (int i = 0; i < copy.getWidth(); i++) {
+            for (int j = 0; j < copy.getHeight(); j++) {
+                int valeurEntiereBleu = (copy.getImage()[i][j].getBlue() << 28) >> 24;
+                int valeurEntiereVert = (copy.getImage()[i][j].getGreen() << 20) >> 16;
+                int valeurEntiereRouge = (copy.getImage()[i][j].getRed() << 12) >> 8;
+                copy.getImage()[i][j].setValeurEntierePixel(
+                        valeurEntiereBleu
+                        | valeurEntiereRouge
+                        | valeurEntiereVert);
+            }
+        }
+        return copy;
+    }
+
+    public void tabToInt() {
+        for (int i = 0; i < this.getWidth(); i++) {
+            for (int j = 0; j < this.getHeight(); j++) {
+                this.getImage()[i][j].tabToInt();
+            }
+        }
     }
 
     public Pixel getPixel(int width, int height) {
