@@ -264,7 +264,7 @@ public class Fenetre extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setText("Diviseur (>=10) :");
+        jLabel11.setText("nb caractère:");
 
         boutonEncoder.setText("Encoder");
         boutonEncoder.addActionListener(new java.awt.event.ActionListener() {
@@ -318,9 +318,8 @@ public class Fenetre extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel1)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel9)
-                                            .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addComponent(jLabel9))
+                                    .addGap(0, 0, Short.MAX_VALUE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(37, 37, 37)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,12 +427,12 @@ public class Fenetre extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(boutonEncoder))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boutonSelectionFichierTexte)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(boutonDecodage)
                         .addComponent(jLabel11)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boutonSelectionFichierTexte))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
@@ -529,7 +528,8 @@ public class Fenetre extends javax.swing.JFrame {
             ImagePNG imPNG = new ImagePNG(imageBF);
             int valeur = Integer.parseInt(jTextField1.getText());
             Graphics2D gd = (Graphics2D) jPanel1.getGraphics();
-            gd.drawImage(imPNG.binairisation(valeur).createBufferedImage(), 0, 0, this);
+            imageSave = imPNG.binairisation(valeur).createBufferedImage();
+            gd.drawImage(imageSave, 0, 0, this);
         }
     }//GEN-LAST:event_radioBoutonBinairisationActionPerformed
 
@@ -581,10 +581,10 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_textDonneesImageActionPerformed
 
     private void histgrammeBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_histgrammeBoutonActionPerformed
-        if (imageBF == null) {
+        if (imageSave == null) {
             JOptionPane.showMessageDialog(null, MessageChargementImage);
         } else {
-            Histogram histogram = new Histogram(new ImagePNG(imageBF));
+            Histogram histogram = new Histogram(new ImagePNG(imageSave));
             histogram.setVisible(true);
         }
 
@@ -683,7 +683,7 @@ public class Fenetre extends javax.swing.JFrame {
             try{
                 bf = new BufferedReader(new FileReader(jFileChooser.getSelectedFile().getName()));
                 while(bf.ready()){
-                    message += bf.readLine()+"\n";
+                    message += bf.readLine();
                 }  
             }catch(IOException e){
                 e.printStackTrace();
@@ -691,13 +691,13 @@ public class Fenetre extends javax.swing.JFrame {
         }
         Message msg = new Message(message);
         msg.binaire();
-        imageBF = Codage.encodage(new ImagePNG(imageBF), msg.getmsgBinaire()).createBufferedImage();
+        imageSave = Codage.encodage(new ImagePNG(imageBF), msg.getmsgBinaire()).createBufferedImage();
         textAeraMessageCode.setText(message);
     }//GEN-LAST:event_boutonSelectionFichierTexteActionPerformed
 
     private void boutonDecodageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonDecodageActionPerformed
-        String message = Codage.decodage(new ImagePNG(imageSave), Integer.parseInt(jTextField2.getText()));
-        textAeraMessageCode.setText(message);
+        String message = Codage.decodage(new ImagePNG(imageSave));
+        textAeraMessageCode.setText(message.substring(0,Integer.parseInt(jTextField2.getText())));
     }//GEN-LAST:event_boutonDecodageActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
