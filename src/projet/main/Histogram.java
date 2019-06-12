@@ -77,6 +77,9 @@ public class Histogram extends JFrame {
         g.drawLine(xd+20, decalage, xd+10, decalage+10);
         g.drawLine(xd+20, decalage, xd+10, decalage-10);
         
+        g.drawLine(xg, decalage-hauteurGraph, xg+10, decalage-hauteurGraph+10);
+        g.drawLine(xg, decalage-hauteurGraph, xg-10, decalage-hauteurGraph+10);
+        
         g.drawString("Canal rouge", 120, decalage+15);
         g.drawString(""+(int)maxRed, xg-35, decalage-(int)(0.75*hauteurGraph));
         //
@@ -86,6 +89,9 @@ public class Histogram extends JFrame {
         g.drawLine(xd+20, 2*decalage, xd+10, 2*decalage+10);
         g.drawLine(xd+20, 2*decalage, xd+10, 2*decalage-10);
         
+        g.drawLine(xg, 2*decalage-hauteurGraph, xg+10, 2*decalage-hauteurGraph+10);
+        g.drawLine(xg, 2*decalage-hauteurGraph, xg-10, 2*decalage-hauteurGraph+10);
+        
         g.drawString("Canal vert", 120, 2*decalage+15);
         g.drawString(""+(int)maxGreen, xg-35, 2*decalage-(int)(0.75*hauteurGraph));
         //
@@ -94,6 +100,9 @@ public class Histogram extends JFrame {
         
         g.drawLine(xd+20, 3*decalage, xd+10, 3*decalage+10);
         g.drawLine(xd+20, 3*decalage, xd+10, 3*decalage-10);
+        
+        g.drawLine(xg, 3*decalage-hauteurGraph, xg+10, 3*decalage-hauteurGraph+10);
+        g.drawLine(xg, 3*decalage-hauteurGraph, xg-10, 3*decalage-hauteurGraph+10);
         
         g.drawString("Canal bleu", 120, 3*decalage+15);
         g.drawString(""+(int)maxBlue, xg-35, 3*decalage-(int)(0.75*hauteurGraph));

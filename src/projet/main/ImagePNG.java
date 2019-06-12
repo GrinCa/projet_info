@@ -52,23 +52,28 @@ public class ImagePNG implements Cloneable{
 
     public ImagePNG filtrage(String type) {
 
-        ImagePNG copy = new ImagePNG(this.getImage().clone());
+        ImagePNG copy = this.copy();
         double[][] H = this.createFilter(type);
-        double valeurDouble = 0;
+        double valeurDoubleRed = 0;
+        double valeurDoubleGreen = 0;
+        double valeurDoubleBlue = 0;
 
-        for (int i = 1; i < this.getImage().length - 1; i++) {
-            for (int j = 1; j < this.getImage()[0].length - 1; j++) {
+        for (int i = 1; i < this.getWidth() - 1; i++) {
+            for (int j = 1; j < this.getHeight() - 1; j++) {
                 for (int m = -1; m <= 1; m++) {
                     for (int n = -1; n <= 1; n++) {
-                        //System.out.println(this.getImage()[i + m][j + n].getValue255("grey"));
-                        valeurDouble += (H[1 + m][1 + n]) * ((this.getImage()[i + m][j + n].getValue255("grey")));
+                        valeurDoubleBlue += (H[1 + m][1 + n]) * (this.getImage()[i + m][j + n].getValue255("blue"));
+                        valeurDoubleGreen += (H[1 + m][1 + n]) * (this.getImage()[i + m][j + n].getValue255("green"));
+                        valeurDoubleRed += (H[1 + m][1 + n]) * (this.getImage()[i + m][j + n].getValue255("red"));
                     }
                 }
-                int valeur = (int) valeurDouble;
-                //System.out.println(new Scanner(System.in).nextLine());
-                //System.out.println(valeurDouble);
-                copy.getImage()[i][j].setValeurEntierePixel(valeur << 16 | valeur << 8 | valeur);
-                valeurDouble = 0;
+                int valeurBlue = (int) valeurDoubleBlue;
+                int valeurGreen = (int) valeurDoubleGreen;
+                int valeurRed = (int) valeurDoubleRed;
+                copy.getImage()[i][j].setValeurEntierePixel(valeurRed << 16 | valeurGreen << 8 | valeurBlue);
+                valeurDoubleRed = 0;
+                valeurDoubleGreen = 0;
+                valeurDoubleBlue = 0;
             }
         }
 
@@ -129,6 +134,18 @@ public class ImagePNG implements Cloneable{
         }
         return copy;
     }
+    
+    public ImagePNG toNegatif(){
+        ImagePNG copy = this.copy();
+        for(int i=0;i<this.getWidth();i++){
+            for(int j=0;j<this.getHeight();j++){
+                copy.getImage()[i][j].setValeurEntierePixel((255-this.getImage()[i][j].getValue255("blue"))|
+                        (255-this.getImage()[i][j].getValue255("blue"))<<8|
+                        (255-this.getImage()[i][j].getValue255("blue"))<<16);
+            }
+        }
+        return copy;
+    }
 
     public ImagePNG copy() {
         return new ImagePNG(this.getImage().clone());
@@ -158,32 +175,34 @@ public class ImagePNG implements Cloneable{
             tab = new double[3][3];
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
-                    tab[i][j] = ((double) 1) / ((double) 9);
+                    tab[i][j] = 1d/9d;
                 }
             }
-        } else if (type.equals("contour")) {
+        } else if(type.equals("flou_gauss")){
             tab = new double[3][3];
-            int den = 15;
-            tab[0][0] = -1d / den;
-            tab[0][1] = -1d / den;
-            tab[0][2] = -1d / den;
-            tab[1][0] = -1d / den;
-            tab[1][1] = 8d / den;
-            tab[1][2] = -1d / den;
-            tab[2][0] = -1d / den;
-            tab[2][1] = -1d / den;
-            tab[2][2] = -1d / den;
-        } else if (type.equals("nette")) {
+            int den = 16;
+            tab[0][0] = 1d / den;
+            tab[0][1] = 2d / den;
+            tab[0][2] = 1d / den;
+            tab[1][0] = 2d / den;
+            tab[1][1] = 4d / den;
+            tab[1][2] = 2d / den;
+            tab[2][0] = 1d / den;
+            tab[2][1] = 2d / den;
+            tab[2][2] = 1d / den;
+            
+        }else if (type.equals("contour")) {
             tab = new double[3][3];
-            tab[0][0] = 0;
-            tab[0][1] = 1d / 5;
-            tab[0][2] = 0;
-            tab[1][0] = 1d / 5;
-            tab[1][1] = 1d;
-            tab[1][2] = 1d / 5;
-            tab[2][0] = 0;
-            tab[2][1] = 1d / 5;
-            tab[2][2] = 0;
+            int den = 4;
+            tab[0][0] = 0d / den;
+            tab[0][1] = 1d / den;
+            tab[0][2] = 0d / den;
+            tab[1][0] = 1d / den;
+            tab[1][1] = -4d / den;
+            tab[1][2] = 1d / den;
+            tab[2][0] = 0d / den;
+            tab[2][1] = 1d / den;
+            tab[2][2] = 0d / den;
         }
 
         return tab;

@@ -5,7 +5,9 @@
  */
 package projet.main;
 
+
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +17,10 @@ public class Codage {
 
     //glisse le message dans la photo
     public static ImagePNG encodage(ImagePNG imagePNG, ArrayList<Integer> messageBinaire) {
+        if(messageBinaire.size() >= imagePNG.getWidth()*imagePNG.getHeight()){
+            JOptionPane.showMessageDialog(null, "Le message est trop long");
+            return imagePNG.copy();
+        }
         ImagePNG copy = imagePNG.copy();
         int cle = 1;
         int compteur = 0;
