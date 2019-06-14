@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 public class ImagePNG {
 
@@ -208,6 +209,12 @@ public class ImagePNG {
     }
 
     public ImagePNG insertImage(ImagePNG imagePNG, int poids) {
+        
+        if(this.getHeight() < imagePNG.getHeight() || this.getWidth() < imagePNG.getWidth()){
+            JOptionPane.showMessageDialog(null, "L'image inserée est trop grande");
+            return this;
+        }
+        
         ImagePNG copy = this.copy();
         
         int cleReduiteInsertion = (int) (Math.pow(2, poids) - 1);
