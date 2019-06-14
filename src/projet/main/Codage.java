@@ -61,5 +61,4 @@ public class Codage {
 
     private ImagePNG imagePNG;
 
-    
 }
