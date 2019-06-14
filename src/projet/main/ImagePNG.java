@@ -234,6 +234,19 @@ public class ImagePNG implements Cloneable{
         return copy;
     }
 
+    public ImagePNG decalage(int valeur) {
+        ImagePNG copy = this.copy();
+        int cle = (int) (Math.pow(2, valeur) - 1);
+        cle = cle | cle<<8 | cle<<16 | cle<<24;
+        for (int i = 0; i < this.getWidth(); i++) {
+            for (int j = 0; j < this.getHeight(); j++) {
+                copy.getImage()[i][j].setValeurEntierePixel((this.getImage()[i][j].getValeurEntierePixel() & cle) << (8-valeur));
+            }
+        }
+        return copy;
+    }
+    
+    
     public ImagePNG getInseredImage() {
         ImagePNG copy = this.copy();
         int cle = 15 | 15 << 8 | 15 << 16 | 15 << 24;
