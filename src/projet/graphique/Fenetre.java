@@ -95,8 +95,6 @@ public class Fenetre extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         textAeraMessageCode = new javax.swing.JTextArea();
         boutonDecodage = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
         boutonEncoder = new javax.swing.JButton();
         boutonContour = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
@@ -262,15 +260,6 @@ public class Fenetre extends javax.swing.JFrame {
             }
         });
 
-        jTextField2.setText("10");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jLabel11.setText("nb caractère:");
-
         boutonEncoder.setText("Encoder");
         boutonEncoder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -380,12 +369,8 @@ public class Fenetre extends javax.swing.JFrame {
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                             .addGap(37, 37, 37)
                                             .addComponent(boutonSelectionFichierTexte)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(boutonDecodage)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jLabel11)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(36, 36, 36)
+                                            .addComponent(boutonDecodage))
                                         .addGroup(layout.createSequentialGroup()
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,8 +435,7 @@ public class Fenetre extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addGap(12, 12, 12)
+                                        .addGap(31, 31, 31)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(boutonHistogramme)
@@ -459,7 +443,6 @@ public class Fenetre extends javax.swing.JFrame {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel14)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .addGap(18, 18, 18)
                                         .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(32, 32, 32)
                                         .addComponent(boutonExtraireImage)
@@ -518,12 +501,9 @@ public class Fenetre extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(boutonEncoder))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(boutonDecodage)
-                        .addComponent(jLabel11)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(boutonSelectionFichierTexte))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boutonSelectionFichierTexte)
+                    .addComponent(boutonDecodage))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -800,22 +780,12 @@ public class Fenetre extends javax.swing.JFrame {
         Message msg = new Message(message);
         msg.binaire();
         imageSave = Codage.encodage(new ImagePNG(imageBF), msg.getmsgBinaire()).createBufferedImage();
-        textAeraMessageCode.setText(message);
     }//GEN-LAST:event_boutonSelectionFichierTexteActionPerformed
 
     private void boutonDecodageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonDecodageActionPerformed
         String message = Codage.decodage(new ImagePNG(imageSave));
-        textAeraMessageCode.setText(message.substring(0,Integer.parseInt(jTextField2.getText())));
+        textAeraMessageCode.setText(message);
     }//GEN-LAST:event_boutonDecodageActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        int valeur = 10; //pour verifer si il y a eu une erreur de conversion en entier et eviter de repeter la meme boite de dialogue
-        try {
-            valeur = Integer.parseInt(jTextField2.getText());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Il faut saisir un entier");
-        }
-    }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void boutonContourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonContourActionPerformed
         ImagePNG imagePNG = new ImagePNG(imageBF);
@@ -890,7 +860,6 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JTextField insertionMessage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -910,7 +879,6 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JRadioButton radioBoutonBinairisation;
     private javax.swing.JRadioButton radioBoutonBleu;
     private javax.swing.JRadioButton radioBoutonGris;

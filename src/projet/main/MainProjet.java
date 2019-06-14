@@ -13,14 +13,21 @@ public class MainProjet extends JFrame {
         Fenetre fen = new Fenetre();
         fen.setVisible(true);
         fen.repaint();
-        /*BufferedImage image = ImageIO.read(new File("image.png"));
+        BufferedImage image = ImageIO.read(new File("image.png"));
         BufferedImage image1 = ImageIO.read(new File("image2.png"));
         ImagePNG imagePNG = new ImagePNG(image);
         ImagePNG imagePNG1 = new ImagePNG(image1);
         imagePNG = imagePNG.insertImage(imagePNG1, 3);
-        ImageView imageView = new ImageView("", imagePNG.createBufferedImage());
+        /*ImageView imageView = new ImageView("", imagePNG.createBufferedImage());
         imageView.setVisible(true);
         imageView.setDefaultCloseOperation(EXIT_ON_CLOSE);*/
+        Message message = new Message("c'est le message");
+        message.binaire();
+        
+        ImagePNG encodee = Codage.encodage(imagePNG,message.getmsgBinaire());
+        System.out.println(Codage.decodage(encodee));
+        
+        
     }
 
 }

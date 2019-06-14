@@ -24,8 +24,6 @@ public class Message {
     public Message(String message) {
         this.message = message;
     }
-    
-    
 
     public void lire(String path) {
 
@@ -34,7 +32,7 @@ public class Message {
         try {
             BufferedReader bf = new BufferedReader(new FileReader(path));
             while (bf.ready()) {
-                msg += bf.readLine()+"\n";
+                msg += bf.readLine() + "\n";
             }
 
         } catch (IOException e) {
@@ -53,17 +51,23 @@ public class Message {
         for (int i = 0; i < t; i++) {
             //La méthode charAt trouve la position et convert en char.
             charVar[i] = message.charAt(i);
-            
         }
     }
 
     public void binaire() {
         this.stringToChar();
         msgBinaire = new ArrayList<Integer>();
+
+        int nombreCaractere = 8*charVar.length;  //le huit est pour un octet
+
+        for (int i = 0; i < 32; i++) {
+            msgBinaire.add((nombreCaractere >> i) & 1);
+        }
+
         for (int i = 0; i < charVar.length; i++) {
             char a = charVar[i];
             for (int j = 0; j < 8; j++) {
-                msgBinaire.add((a>>j) & 1);
+                msgBinaire.add((a >> j) & 1);
             }
         }
     }
@@ -71,7 +75,8 @@ public class Message {
     public char[] getCharVar() {
         return charVar;
     }
-    public ArrayList<Integer> getmsgBinaire(){
+
+    public ArrayList<Integer> getmsgBinaire() {
         return msgBinaire;
     }
 
