@@ -12,10 +12,10 @@ package projet.main;
 public class Binaire {
     
     static void affiche(int n){
-        String bin = "";
+        StringBuilder bin = new StringBuilder();
         for(int i =0;i<32;i++){
-            bin+=""+((n>>i)&1);
+            bin.append(Integer.toString((n>>i)&1));
         }
-        System.out.println(bin);
+        System.out.println(bin.reverse().toString());
     }
 }

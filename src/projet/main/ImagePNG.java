@@ -27,13 +27,12 @@ public class ImagePNG {
         this.Height = image[0].length;
     }
 
-
     public ImagePNG(Pixel[][] image) {
         this.Width = image.length;
         this.Height = image[0].length;
         this.image = new Pixel[Width][Height];
-        for(int i =0;i<Width;i++){
-            for(int j=0;j<Height;j++){
+        for (int i = 0; i < Width; i++) {
+            for (int j = 0; j < Height; j++) {
                 this.image[i][j] = new Pixel(image[i][j].getValeurEntierePixel());
             }
         }
@@ -134,14 +133,14 @@ public class ImagePNG {
         }
         return copy;
     }
-    
-    public ImagePNG toNegatif(){
+
+    public ImagePNG toNegatif() {
         ImagePNG copy = this.copy();
-        for(int i=0;i<this.getWidth();i++){
-            for(int j=0;j<this.getHeight();j++){
-                copy.getImage()[i][j].setValeurEntierePixel((255-this.getImage()[i][j].getValue255("blue"))|
-                        (255-this.getImage()[i][j].getValue255("blue"))<<8|
-                        (255-this.getImage()[i][j].getValue255("blue"))<<16);
+        for (int i = 0; i < this.getWidth(); i++) {
+            for (int j = 0; j < this.getHeight(); j++) {
+                copy.getImage()[i][j].setValeurEntierePixel((255 - this.getImage()[i][j].getValue255("blue"))
+                        | (255 - this.getImage()[i][j].getValue255("blue")) << 8
+                        | (255 - this.getImage()[i][j].getValue255("blue")) << 16);
             }
         }
         return copy;
@@ -175,10 +174,10 @@ public class ImagePNG {
             tab = new double[3][3];
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
-                    tab[i][j] = 1d/9d;
+                    tab[i][j] = 1d / 9d;
                 }
             }
-        } else if(type.equals("flou_gauss")){
+        } else if (type.equals("flou_gauss")) {
             tab = new double[3][3];
             int den = 16;
             tab[0][0] = 1d / den;
@@ -190,8 +189,8 @@ public class ImagePNG {
             tab[2][0] = 1d / den;
             tab[2][1] = 2d / den;
             tab[2][2] = 1d / den;
-            
-        }else if (type.equals("contour")) {
+
+        } else if (type.equals("contour")) {
             tab = new double[3][3];
             int den = 4;
             tab[0][0] = 0d / den;
@@ -208,50 +207,47 @@ public class ImagePNG {
         return tab;
     }
 
-    public ImagePNG insertImage(ImagePNG imagePNG) {
-        ImagePNG copy = imagePNG.copy();
-        int cle = 15 << 4 | 15 << 12 | 15 << 20 | 15 << 28;
+    public ImagePNG insertImage(ImagePNG imagePNG, int poids) {
+        ImagePNG copy = this.copy();
+        
+        int cleReduiteInsertion = (int) (Math.pow(2, poids) - 1);
+        int cleInsertion = (cleReduiteInsertion << (8 - poids)) | (cleReduiteInsertion << (16 - poids))
+                | (cleReduiteInsertion << (24 - poids)) | (cleReduiteInsertion << (32 - poids));
+
+        int cleReduiteExtraction = (int) (Math.pow(2, 8 - poids) - 1);
+        int cleExtraction = (cleReduiteExtraction << poids) | (cleReduiteExtraction << (8 + poids))
+                | (cleReduiteExtraction << (16 + poids)) | (cleReduiteExtraction << (24 + poids));
+
         for (int i = 0; i < imagePNG.getWidth(); i++) {
             for (int j = 0; j < imagePNG.getHeight(); j++) {
-                int valeurEntiereImageBase = this.getImage()[i][j].getValeurEntierePixel() & cle;
-                int valeurEntiereImageInseree = (copy.getImage()[i][j].getValeurEntierePixel() & cle) >> 4;
-                copy.getImage()[i][j].setValeurEntierePixel(valeurEntiereImageInseree
-                        | valeurEntiereImageBase);
+                int valeurEntiereImageBase
+                        = this.getImage()[i][j].getValeurEntierePixel() & cleExtraction;
+                int valeurEntiereImageInseree
+                        = (imagePNG.getImage()[i][j].getValeurEntierePixel() & cleInsertion) >> (8 - poids);
+                copy.getImage()[i][j].setValeurEntierePixel(
+                        valeurEntiereImageInseree | valeurEntiereImageBase);
             }
         }
         return copy;
     }
-    
+
     public ImagePNG decalage(int valeur) {
         ImagePNG copy = this.copy();
         int cle = (int) (Math.pow(2, valeur) - 1);
-        cle = cle | cle<<8 | cle<<16 | cle<<24;
+        cle = cle | cle << 8 | cle << 16 | cle << 24;
         for (int i = 0; i < this.getWidth(); i++) {
             for (int j = 0; j < this.getHeight(); j++) {
-                copy.getImage()[i][j].setValeurEntierePixel((this.getImage()[i][j].getValeurEntierePixel() & cle) << (8-valeur));
+                copy.getImage()[i][j].setValeurEntierePixel((this.getImage()[i][j].getValeurEntierePixel() & cle) << (8 - valeur));
             }
         }
         return copy;
     }
 
     
-    
-    
-    public ImagePNG getInseredImage() {
-        ImagePNG copy = this.copy();
-        int cle = 15 | 15 << 8 | 15 << 16 | 15 << 24;
-        for (int i = 0; i < copy.getWidth(); i++) {
-            for (int j = 0; j < copy.getHeight(); j++) {
-                copy.getImage()[i][j].setValeurEntierePixel(
-                        (this.getImage()[i][j].getValeurEntierePixel() & cle) << 4);
-            }
-        }
-        return copy;
-    }
 
     public ImagePNG getImageBase() {
         ImagePNG copy = this.copy();
-        int cle = 240 | 240<<8 | 240<<8 | 240<<8;
+        int cle = 240 | 240 << 8 | 240 << 8 | 240 << 8;
         for (int i = 0; i < copy.getWidth(); i++) {
             for (int j = 0; j < copy.getHeight(); j++) {
                 copy.getImage()[i][j].setValeurEntierePixel(
