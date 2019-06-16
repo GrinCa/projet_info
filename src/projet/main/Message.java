@@ -36,6 +36,7 @@ public class Message {
             }
 
         } catch (IOException e) {
+            e.printStackTrace();
         }
         message = msg;
 
@@ -58,7 +59,7 @@ public class Message {
         this.stringToChar();
         msgBinaire = new ArrayList<Integer>();
 
-        int nombreCaractere = 8*charVar.length;  //le huit est pour un octet
+        int nombreCaractere = 8 * charVar.length;  //le huit est pour un octet
 
         for (int i = 0; i < 32; i++) {
             msgBinaire.add((nombreCaractere >> i) & 1);

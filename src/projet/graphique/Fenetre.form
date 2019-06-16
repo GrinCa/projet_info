@@ -365,6 +365,7 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textBinairisationActionPerformed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textBinairisationKeyReleased"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="boutonSelectionInsertion">

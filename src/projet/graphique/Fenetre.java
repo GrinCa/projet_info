@@ -54,6 +54,7 @@ public class Fenetre extends javax.swing.JFrame {
         jSlider1.setEnabled(false);
         boutonAffichageComplet.setEnabled(false);
         boutonExtraireImage.setEnabled(false);
+        
 
     }
 
@@ -173,6 +174,11 @@ public class Fenetre extends javax.swing.JFrame {
         textBinairisation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textBinairisationActionPerformed(evt);
+            }
+        });
+        textBinairisation.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textBinairisationKeyReleased(evt);
             }
         });
 
@@ -567,7 +573,8 @@ public class Fenetre extends javax.swing.JFrame {
         jSlider1.setEnabled(true);
         boutonAffichageComplet.setEnabled(true);
         boutonExtraireImage.setEnabled(true);
-        
+        radioBoutonBinairisation.setEnabled(true);
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void radioBoutonRougeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBoutonRougeActionPerformed
@@ -715,7 +722,7 @@ public class Fenetre extends javax.swing.JFrame {
     private void boutonInsererActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonInsererActionPerformed
         ImagePNG imagePNG1 = new ImagePNG(imageBF);
         ImagePNG imagePNG2 = new ImagePNG(imageInseree);
-        ImagePNG insertion = imagePNG1.insertImage(imagePNG2,Integer.parseInt(jSpinner1.getValue().toString()));
+        ImagePNG insertion = imagePNG1.insertImage(imagePNG2, Integer.parseInt(jSpinner1.getValue().toString()));
         Graphics2D g = (Graphics2D) jPanel1.getGraphics();
         imageSave = insertion.createBufferedImage();
         imageInsertionSave = insertion.createBufferedImage();
@@ -748,21 +755,21 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_boutonAnnulationModifsActionPerformed
 
     private void insertionMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertionMessageActionPerformed
-        
+
     }//GEN-LAST:event_insertionMessageActionPerformed
 
     private void boutonSelectionFichierTexteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonSelectionFichierTexteActionPerformed
         JFileChooser jFileChooser = new JFileChooser(".");
         int retour = jFileChooser.showOpenDialog(null);
         String message = "";
-        if(retour == JFileChooser.APPROVE_OPTION){
+        if (retour == JFileChooser.APPROVE_OPTION) {
             BufferedReader bf = null;
-            try{
+            try {
                 bf = new BufferedReader(new FileReader(jFileChooser.getSelectedFile().getName()));
-                while(bf.ready()){
-                    message += bf.readLine();
-                }  
-            }catch(IOException e){
+                while (bf.ready()) {
+                    message += bf.readLine() + "\n";
+                }
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -784,12 +791,12 @@ public class Fenetre extends javax.swing.JFrame {
         Graphics2D g = (Graphics2D) jPanel1.getGraphics();
         g.drawImage(imageSave, 0, 0, this);
         jPanel1.paintComponents(g);
-        
+
     }//GEN-LAST:event_boutonContourActionPerformed
 
     private void boutonFlouGaussienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonFlouGaussienActionPerformed
         ImagePNG imagePNG = new ImagePNG(imageBF);
-        imagePNG = imagePNG.filtrage("flou_gauss");
+        imagePNG = imagePNG.filtrage("flou_gauss").filtrage("flou_gauss").filtrage("flou_gauss").filtrage("flou_gauss");
         imageSave = imagePNG.createBufferedImage();
         Graphics2D g = (Graphics2D) jPanel1.getGraphics();
         g.drawImage(imageSave, 0, 0, this);
@@ -802,7 +809,7 @@ public class Fenetre extends javax.swing.JFrame {
         imageInsertionSave = imagePNG.createBufferedImage();
         Graphics2D g = (Graphics2D) jPanel1.getGraphics();
         g.drawImage(imageInsertionSave, 0, 0, this);
-        
+
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void boutonEncoderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonEncoderActionPerformed
@@ -822,6 +829,10 @@ public class Fenetre extends javax.swing.JFrame {
         ImageView imageView = new ImageView("", imageSave);
         imageView.setVisible(true);
     }//GEN-LAST:event_boutonExtraireImageActionPerformed
+
+    private void textBinairisationKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBinairisationKeyReleased
+        
+    }//GEN-LAST:event_textBinairisationKeyReleased
 
     private BufferedImage imageBF = null;
     private BufferedImage imageSave = null;
