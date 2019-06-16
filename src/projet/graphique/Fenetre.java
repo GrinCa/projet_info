@@ -54,6 +54,7 @@ public class Fenetre extends javax.swing.JFrame {
         jSlider1.setEnabled(false);
         boutonAffichageComplet.setEnabled(false);
         boutonExtraireImage.setEnabled(false);
+        textBinairisation.setEnabled(false);
         
 
     }
@@ -574,6 +575,7 @@ public class Fenetre extends javax.swing.JFrame {
         boutonAffichageComplet.setEnabled(true);
         boutonExtraireImage.setEnabled(true);
         radioBoutonBinairisation.setEnabled(true);
+        textBinairisation.setEnabled(true);
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -734,8 +736,6 @@ public class Fenetre extends javax.swing.JFrame {
     private void checkBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxActionPerformed
         if (checkBox.isSelected()) {
             imageBF = imageSave;
-            radioBoutonGris.setEnabled(false);
-            textBinairisation.setEnabled(false);
         } else {
             try {
                 imageBF = ImageIO.read(new File(path));
