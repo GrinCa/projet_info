@@ -19,6 +19,10 @@ class Pixel {
         this.valeurEntierePixel = valeurEntierePixel;
     }
     
+    public Pixel(){
+        this.valeurEntierePixel = 0;
+    }
+    
     public Pixel copy(){
         return new Pixel(this.getValeurEntierePixel());
     }

@@ -5,6 +5,7 @@
  */
 package projet.main;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -33,21 +34,19 @@ public class Codage {
         return copy;
     }
 
-    public static String decodage(ImagePNG imageADecodee) {
-        int longueurTot = imageADecodee.getWidth() * imageADecodee.getHeight();
+    public static String decodageTexte(ImagePNG imageADecoder) {
         ArrayList<Integer> messageBin = new ArrayList<Integer>();
         int longueurMessage = 0;
 
         for (int i = 0; i < 32; i++) {
-            longueurMessage |= (imageADecodee.getImage()[i / imageADecodee.getHeight()][i % imageADecodee.getHeight()]
+            longueurMessage |= (imageADecoder.getImage()[i / imageADecoder.getHeight()][i % imageADecoder.getHeight()]
                     .getValeurEntierePixel() & 1) << i;
         }
 
         for (int i = 32; i < 32 + longueurMessage; i++) {
-            messageBin.add(imageADecodee.getImage()[i / imageADecodee.getHeight()][i % imageADecodee.getHeight()]
+            messageBin.add(imageADecoder.getImage()[i / imageADecoder.getHeight()][i % imageADecoder.getHeight()]
                     .getValeurEntierePixel() & 1);
         }
-
         String message = "";
         for (int i = 0; i < messageBin.size(); i += 8) {
             byte element = 0;
@@ -56,7 +55,41 @@ public class Codage {
             }
             message += (char) element;
         }
+
         return message;
+    }
+
+    public static ImagePNG decodageImage(ImagePNG imageADecoder) {
+        ArrayList<Integer> messageBin = new ArrayList<Integer>();
+        int header = 0;
+
+        for (int i = 0; i < 32; i++) {
+            header |= (imageADecoder.getImage()[i / imageADecoder.getHeight()][i % imageADecoder.getHeight()]
+                    .getValeurEntierePixel() & 1) << i;
+        }
+        int cle = 255 | (255 << 8);
+        int width = header & cle;
+        int height = (header & (cle << 16)) >> 16;
+
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+        for (int i = 32; i < 32 + 32 * width * height; i++) {
+            messageBin.add(imageADecoder.getImage()[i / imageADecoder.getHeight()][i % imageADecoder.getHeight()]
+                    .getValeurEntierePixel() & 1);
+        }
+        int compteur = 0;
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int valeurEntiere = 0;
+                for (int k = compteur; k < compteur + 32; k++) {
+                    valeurEntiere |= messageBin.get(k)<<(k%32);
+                }
+                compteur+=32;
+                image.setRGB(i,j,valeurEntiere);
+            }
+        }
+
+        return new ImagePNG(image);
     }
 
     private ImagePNG imagePNG;

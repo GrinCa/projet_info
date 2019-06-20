@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -209,14 +210,14 @@ public class ImagePNG {
     }
 
     public ImagePNG insertImage(ImagePNG imagePNG, int poids) {
-        
-        if(this.getHeight() < imagePNG.getHeight() || this.getWidth() < imagePNG.getWidth()){
+
+        if (this.getHeight() < imagePNG.getHeight() || this.getWidth() < imagePNG.getWidth()) {
             JOptionPane.showMessageDialog(null, "L'image inserée est trop grande");
             return this;
         }
-        
+
         ImagePNG copy = this.copy();
-        
+
         int cleReduiteInsertion = (int) (Math.pow(2, poids) - 1);
         int cleInsertion = (cleReduiteInsertion << (8 - poids)) | (cleReduiteInsertion << (16 - poids))
                 | (cleReduiteInsertion << (24 - poids)) | (cleReduiteInsertion << (32 - poids));
@@ -250,8 +251,6 @@ public class ImagePNG {
         return copy;
     }
 
-    
-
     public ImagePNG getImageBase() {
         ImagePNG copy = this.copy();
         int cle = 240 | 240 << 8 | 240 << 8 | 240 << 8;
@@ -262,6 +261,24 @@ public class ImagePNG {
             }
         }
         return copy;
+    }
+
+    public ArrayList<Integer> imageToBin() {
+        ArrayList<Integer> listeBin = new ArrayList<>();
+        int width = this.getWidth();
+        int height = this.getHeight();
+        int header = width | (height << 16);
+        for (int i = 0; i < 32; i++) {
+            listeBin.add((header >> i) & 1);
+        }
+        for (int i = 0; i < this.getWidth(); i++) {
+            for (int j = 0; j < this.getHeight(); j++) {
+                for (int k = 0; k < 32; k++) {
+                    listeBin.add((this.getImage()[i][j].getValeurEntierePixel() >> k) & 1);
+                }
+            }
+        }
+        return listeBin;
     }
 
     public Pixel getPixel(int width, int height) {
