@@ -52,7 +52,6 @@ public class ImagePNG {
     }
 
     public ImagePNG filtrage(String type) {
-
         ImagePNG copy = this.copy();
         double[][] H = this.createFilter(type);
         double valeurDoubleRed = 0;
@@ -82,7 +81,7 @@ public class ImagePNG {
     }
 
     public ImagePNG getBlue() {
-        ImagePNG copy = new ImagePNG(this.image.clone()); //on creer une copy de this
+        ImagePNG copy = this.copy(); //on creer une copy de this
         for (int i = 0; i < image.length; i++) {
             for (int j = 0; j < image[0].length; j++) {
                 copy.image[i][j].setValeurEntierePixel(image[i][j].getBlue());
@@ -92,7 +91,7 @@ public class ImagePNG {
     }
 
     public ImagePNG getGreen() {
-        ImagePNG copy = new ImagePNG(this.image.clone()); //on creer une copy de this
+        ImagePNG copy = this.copy(); //on creer une copy de this
         for (int i = 0; i < image.length; i++) {
             for (int j = 0; j < image[0].length; j++) {
                 copy.image[i][j].setValeurEntierePixel(image[i][j].getGreen());
@@ -112,7 +111,7 @@ public class ImagePNG {
     }
 
     public ImagePNG getGrey() {
-        ImagePNG copy = new ImagePNG(this.image.clone()); //on creer une copy de this
+        ImagePNG copy = this.copy(); //on creer une copy de this
         for (int i = 0; i < image.length; i++) {
             for (int j = 0; j < image[0].length; j++) {
                 copy.image[i][j].setValeurEntierePixel(copy.image[i][j].getGrey());
@@ -248,6 +247,14 @@ public class ImagePNG {
                 copy.getImage()[i][j].setValeurEntierePixel((this.getImage()[i][j].getValeurEntierePixel() & cle) << (8 - valeur));
             }
         }
+        return copy;
+    }
+    
+    public ImagePNG exemple(){
+        ImagePNG copy = this.copy();
+        /*
+            Code appliqué a copy
+        */
         return copy;
     }
 
