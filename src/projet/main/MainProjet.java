@@ -9,6 +9,7 @@ public class MainProjet extends JFrame {
         Fenetre fen = new Fenetre();
         fen.setVisible(true);
         fen.repaint();
+        System.out.println("Insertion du texte");
     }
 
 }
